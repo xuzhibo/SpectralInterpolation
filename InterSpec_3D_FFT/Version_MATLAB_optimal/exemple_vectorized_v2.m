@@ -12,7 +12,7 @@ clc
 g = @(x,y,z) max(x-1,0);
 
 % Axis - rows
-nr = 50;
+nr = 25;
 ar = 0;
 br = 50;
 
@@ -40,6 +40,7 @@ figure(1)
 plot(Xr(1,:,1)',hcheby_3D(1,:,1),'r--o');
 
 hcheby_3D = permute(hcheby_3D,[2 1 3]);
+
 % Step one : interpolation of the function.
 display('Coefficients calculation ...');
 tic;
@@ -69,7 +70,7 @@ hold on
 plot(tr,g_t,'bl');
 
 % figure(2)
-plot(tr,g_interp,'g*');
+plot(tr,g_interp,'g--*');
 
 % figure(3)
 plot(tr,g_interp2,'r--');
