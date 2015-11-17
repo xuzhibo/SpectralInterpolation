@@ -9,7 +9,7 @@ clc
 %% Parameters
 
 % Function to be interpolated
-g = @(x,y,z) max(y,0)+2*x-z.^2;
+g = @(x,y,z) max(y,0)+2*x-z;
 
 % Axis - rows
 nr = 50;
@@ -27,29 +27,35 @@ ap = -3;
 bp = 3;
 
 % % 3D coordinates of the vector to be evaluated
-
+% tr = ( ar:0.5:br);
+% tc = zeros(1,length(tr));
+% tp = tc;
 tr = 0:0.5:3;
 tc = 0:0.5:3;
 tp  = 0:0.5:3;
 
 %% PART ONE - INTERPOLATION AND EVALUATION
 
-% Editor's note : this is a voluntary inversion between the rows and the
-% columns. Please use this code as instructed :)
-
+% Editor's note : this
 [Xr,Xc,Xp] = chebynodes_grid_3D(ac,bc,nc,ar,br,nr,ap,bp,np);
 hcheby_3D = g(Xr,Xc,Xp);
 
 % Step one : interpolation of the function.
 display('Coefficients calculation ...');
-
 tic;
-[coeff] = interpspec3D_FFT_vec(hcheby_3D);
+[coeff1] = interpspec3D_FFT(hcheby_3D);
 toc;
 
+tic;
+[coeff2] = interpspec3D_FFT_vec(hcheby_3D);
+toc;
 % Step two : Evaluation of the interpolated function on the vector t.
 display('Evaluation of the function...');
-g_interp = eval_func_3D_vec(coeff,tr,tc,tp,ar,br,ac,bc,ap,bp);
+g_interp = eval_func_3D_vec(coeff1,tr,tc,tp,ar,br,ac,bc,ap,bp);
+g_interp2 = eval_func_3D_vec(coeff2,tr,tc,tp,ar,br,ac,bc,ap,bp);
+g_interp3 = eval_func_3D_vec(coeff2,tc,tr,tp,ac,bc,ar,br,ap,bp);
+
+
 
 %% PART TWO - OPTIONAL
 
@@ -58,11 +64,19 @@ g_t=g(tr,tc,tp);
 
 % We now want to compare our interpolated function with the original 
 % function.
-figure(1)
+figure(2)
 hold on
+% figure(1)
 
 plot(tr,g_t,'bl');
-plot(tr,g_interp,'r--*');
+
+% figure(2)
+%plot(tr,g_interp,'g--*');
+
+% figure(3)
+plot(tr,g_interp2,'r--');
+%plot(tr,g_interp3,'g--o');
+
 
 hold off
 
