@@ -10,6 +10,6 @@ xrv = chebynodes(ar,br,nr);
 xcv = chebynodes(ac,bc,nc);
 xpv = chebynodes(ap,bp,np);
 
-[Xc,Xr,Xp] = meshgrid(xrv,xcv,xpv);
+[Xr,Xc,Xp] = meshgrid(xrv,xcv,xpv);
 
 end

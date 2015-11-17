@@ -11,12 +11,12 @@ clc
 % Function to be interpolated
 g = @(x,y,z) max(x-1,0);
 
-% Axis - rows
-nr = 50;
-ar = 0;
-br = 50;
-
 % Axis - columns
+nr = 4;
+ar = -5;
+br = 5;
+
+% Axis - rows
 nc = 10;
 ac = -4;
 bc = 4;
@@ -27,7 +27,7 @@ ap = -3;
 bp = 3;
 
 % 3D coordinates of the vector to be evaluated
-tr = ( ar:0.5:br);
+tr = ( -4:0.5:4);
 tc = zeros(1,length(tr));
 tp = tr;
 
@@ -36,10 +36,6 @@ tp = tr;
 [Xr,Xc,Xp] = chebynodes_grid_3D(ar,br,nr,ac,bc,nc,ap,bp,np);
 hcheby_3D = g(Xr,Xc,Xp);
 
-figure(1)
-plot(Xr(1,:,1)',hcheby_3D(1,:,1),'r--o');
-
-hcheby_3D = permute(hcheby_3D,[2 1 3]);
 % Step one : interpolation of the function.
 display('Coefficients calculation ...');
 tic;
@@ -62,10 +58,8 @@ g_t=g(tr,tc,tp);
 
 % We now want to compare our interpolated function with the original 
 % function.
-figure(2)
 hold on
 % figure(1)
-
 plot(tr,g_t,'bl');
 
 % figure(2)
