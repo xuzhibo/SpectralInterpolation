@@ -9,3 +9,4 @@ TODO
 
 - Multilinear form expression for evaluating functions.
 - Check the matlab X-Y row-column inverted storing "bug".
+- Check that it works with Octave. (it should)
