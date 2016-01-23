@@ -7,7 +7,7 @@ Still in progress.
 
 TODO
 
-- Multilinear form expression for evaluating functions.
+- Multilinear form expression for evaluating functions, for 3D function.
 - Check the matlab X-Y row-column inverted storing "bug".
 - Check that it works with Octave. (it should)
 - Performance compared to linear
