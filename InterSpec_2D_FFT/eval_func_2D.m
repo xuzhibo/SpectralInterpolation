@@ -9,14 +9,8 @@ B = zeros(n2,1);
 chebypoly_x = chebypoly(x,a1,b1,n1);
 chebypoly_y = chebypoly(y,a2,b2,n2);
 
-for k = 1:n2
-    
-    A = coefficients(k,:) * chebypoly_x;
-    B(k) = sum(A) * chebypoly_y(k);
-    
-end
+z = chebypoly_y' * coefficients * chebypoly_x;
 
-z = sum(B);
 
 end
 
